@@ -1,0 +1,9 @@
+max 10
+julien 15
+fabien 7
+soso 11
+max 2
+max 3
+julien 8
+fabien 7
+soso 8
