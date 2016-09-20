@@ -1,0 +1,19 @@
+#récupérer le dépôt:
+
+$> git clone https://github.com/maxblaszka/name.git
+
+#ajouter fichiers / dossiers:
+
+$> git add .
+
+#commit local:
+
+$> git commit -a -m "commentaire"
+
+#propagation serveur:
+
+$> git push origin master
+
+#mise a jour du dépôt:
+
+$> git pull origin
