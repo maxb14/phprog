@@ -2,47 +2,40 @@
 
 require("fonctions1.inc");
 
-$candidats = array("pierre", "marie");
-$countm = 0;
-$countp = 0;
+$candidats = array("pierre" => 0, "marie" => 0, "paul" => 0, "toto" => 0);
+
+
+function finvote($tab) {
+	echo "Voici le classement final des votes: \n\n";
+	arsort($tab);
+	$i = 1;
+	$total = 0;
+	foreach ($tab as $nom => $nbvote) {
+		$total += $nbvote;
+	}
+	foreach ($tab as $nom => $nbvote) {
+		$percent = ($nbvote*100)/$total;
+		// 1) Pierre | 5 votes !
+		echo $i.") ".$nom." | ".$nbvote." votes avec un total de ".$percent." % !\n";
+		$i++; // i = i + 1;
+	}
+}
 
 while (true) {
-      echo "Pour qui souhaitez vous voter ? ";
-      $nom = lire();
-      if ($nom == "fin") {
-      	 $pm = 0;
-	 $pp = 0;
-	 if (($countm or $countp) > 0) {
-      	    $pm = ($countm*100)/($countm+$countp);
-	    $pp = ($countp*100)/($countm+$countp);
-	 }
-      	 echo "fin du vote\n";
-	 echo "Marie a obtenu ".$countm." votes !! => ".$pm." % !!\n";
-	 echo "Pierre a obtenu ".$countp." votes !! => ".$pp." % !!\n";
-	 if ($countm > $countp) {
-	    echo "Marie gagne !\n";
-	 }
-	 elseif ($countm < $countp) {
-	 	echo "Pierre gagne !!\n";
-	 }
-	 else {
-	      echo "Egalité entre les deux candidats !!\n";
-	 }
-
-	 break;
-      }
-      if (in_array($nom ,$candidats)) {
-      	 echo "Vous avez voté pour ".$nom." !!\n";
-	 if ($nom == "marie") {
-	    $countm++;
-	 }
-	 if ($nom == "pierre") {
-	      $countp++;
-	 }		
-      }
-      else {
-      	   echo "ce candidat nexiste pas !!\n";
-      }
+	echo "Pour qui souhaitez vous voter ? ";
+	$nom = lire();
+	if ($nom == "fin") {
+		echo "le vote est clos !!\n";
+		finvote($candidats);
+		break;
+	}
+	if (array_key_exists($nom, $candidats)) {
+		echo "Vous avez voté pour ".$nom." !!\n";
+		$candidats[$nom] += 1;
+	}
+	else {
+		echo "ce candidat nexiste pas !!\n";
+	}
 }
 
 ?>
